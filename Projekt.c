@@ -25,3 +25,14 @@ void display(const Game *gra, const char *zagadka){
     printf("\t    złych odpowiedzi %d:\n \x1b[31m %s \x1b[0m \n", wg, gra->ws);
     printf("słowo: %s\n", zagadka);
 }
+//**********************************************************************************************
+
+int shuffle(Buffer *buf){
+    size_t rnd, tmp;
+    for(size_t i=buf->words-1; i>0; --i){
+        rnd=rand()%i;
+        tmp=buf->index[rnd];
+        buf->index[rnd]=buf->index[i];
+        buf->index[i]=tmp;
+    }
+}
