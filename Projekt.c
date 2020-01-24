@@ -36,3 +36,50 @@ int shuffle(Buffer *buf){
         buf->index[i]=tmp;
     }
 }
+//**********************************************************************************************
+
+int main(void){
+    Buffer text=readwords("slowa.txt");
+    Game gra={0,{[0 ... 6]= 0}};
+    int ch;
+    srand(time(NULL));
+    shuffle(&text);
+    size_t slowo=0;
+    char *zagadka=NULL;
+    title();
+    menu();
+    getch();
+ //**********************************     MAIN      ******************************************
+    do{
+        char *nieznany=text.buffer+text.index[slowo];
+        size_t len=strlen(nieznany);
+        zagadka=realloc(zagadka, len);
+        for(int i=0; i<len; ++i) zagadka[i]='_';
+        zagadka[len]=0;
+        do{
+            display(&gra, zagadka);
+
+            ch=getch();
+            if(strchr(nieznany, ch))
+            for(size_t i=0; i<len; ++i){
+                if(ch==nieznany[i]) zagadka[i]=ch;
+            }
+            else if(!strchr(gra.ws, ch)){ 
+                gra.ws[gra.wg++]=ch;
+            }
+        }while(strcmp(nieznany, zagadka)&& ch!=('d' & 0x1f) && ch!=EOF && gra.wg<6);
+        
+        //**********************************     MAIN      ******************************************        
+        display(&gra, nieznany);
+        if(strcmp(nieznany, zagadka)) printf("\nPrzegrałeś.\n");
+        else printf("\x1b[42m\x1b[1m BRAWO Wygrałeś! Z %d pudłem :P.\x1b[22m\x1b[0m\n",gra.wg);
+        if(ch==EOF || ch==('d' & 0x1f)) break;
+        printf("Spróbować ponownie (T/N)? \n");
+        ch=getch();
+        gra.wg=0;
+        for(size_t i=0; i<7; ++i) gra.ws[i]=0;
+        ++slowo;
+        slowo %= text.words;
+    }while(tolower(ch)!='n');          
+}
+
