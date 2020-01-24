@@ -25,3 +25,5 @@ void initTermios(int echo) {
     nowy.c_lflag &= echo ? ECHO : ~ECHO;
     tcsetattr(0, TCSANOW, &nowy);
 }
+
+void resetTermios(void) { tcsetattr(0, TCSANOW, &stary); }
