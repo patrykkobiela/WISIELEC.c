@@ -17,3 +17,11 @@ void title(void)
 }
 
 static struct termios stary, nowy;
+
+void initTermios(int echo) { 
+    tcgetattr(0, &stary);
+    nowy = stary;
+    nowy.c_lflag &= ~ICANON;
+    nowy.c_lflag &= echo ? ECHO : ~ECHO;
+    tcsetattr(0, TCSANOW, &nowy);
+}
