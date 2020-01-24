@@ -34,3 +34,5 @@ char getch_(int echo) {
     resetTermios();
     return ch;
 }
+
+char getch(void) { return getch_(0); }
