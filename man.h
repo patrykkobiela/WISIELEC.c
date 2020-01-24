@@ -39,3 +39,12 @@ char getch(void) { return getch_(0); }
 char getche(void) {	return getch_(1); }
 
 typedef struct {int wg; char ws[7]; } Game;
+
+typedef struct { size_t word, words, *index; char *buffer; } Buffer;
+Buffer readwords(const char *fn){
+    char buffer[512];
+    char *bp, *wi, *wl;
+    size_t size, elements, bytes, wlen=0, ilen, len;
+    FILE *stream, *tstream;
+    FILE *fp=fopen(fn, "r");
+    stream=open_memstream(&bp, &size);
