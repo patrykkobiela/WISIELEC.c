@@ -25,6 +25,7 @@ void display(const Game *gra, const char *zagadka){
     printf("\t    złych odpowiedzi %d:\n \x1b[31m %s \x1b[0m \n", wg, gra->ws);
     printf("słowo: %s\n", zagadka);
 }
+
 //**********************************************************************************************
 
 int shuffle(Buffer *buf){
@@ -36,6 +37,7 @@ int shuffle(Buffer *buf){
         buf->index[i]=tmp;
     }
 }
+
 //**********************************************************************************************
 
 int main(void){
@@ -49,7 +51,8 @@ int main(void){
     title();
     menu();
     getch();
- //**********************************     MAIN      ******************************************
+    
+//**********************************     MAIN      ******************************************
     do{
         char *nieznany=text.buffer+text.index[slowo];
         size_t len=strlen(nieznany);
@@ -68,8 +71,7 @@ int main(void){
                 gra.ws[gra.wg++]=ch;
             }
         }while(strcmp(nieznany, zagadka)&& ch!=('d' & 0x1f) && ch!=EOF && gra.wg<6);
-        
-        //**********************************     MAIN      ******************************************        
+//**********************************     MAIN      ******************************************        
         display(&gra, nieznany);
         if(strcmp(nieznany, zagadka)) printf("\nPrzegrałeś.\n");
         else printf("\x1b[42m\x1b[1m BRAWO Wygrałeś! Z %d pudłem :P.\x1b[22m\x1b[0m\n",gra.wg);
@@ -82,4 +84,6 @@ int main(void){
         slowo %= text.words;
     }while(tolower(ch)!='n');          
 }
+
+
 
