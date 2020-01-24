@@ -5,6 +5,9 @@
 #include <termio.h>
 #include <time.h>
 
+
+
+
 void title(void)   
 {
       printf("\t*******************************************************\n");
@@ -15,6 +18,7 @@ void title(void)
       printf("\t*\x1b[40m\x1b[32m  #      #     #   # #   #  ####  ####  ####      # \x1b[0m *\n");
       printf("\t*******************************************************\n\n");
 }
+
 
 static struct termios stary, nowy;
 
@@ -68,8 +72,10 @@ Buffer readwords(const char *fn){
                 wlen++;
                 next:;
             }
-fflush(tstream); fclose(tstream);
+    fflush(tstream); fclose(tstream);
     fflush(stream); fclose(stream);
     free(bp);
     return (Buffer){.words=ilen/sizeof ilen, .index=(size_t *)wi, .buffer=wl};
 }
+
+
