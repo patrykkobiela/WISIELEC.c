@@ -37,3 +37,5 @@ char getch_(int echo) {
 
 char getch(void) { return getch_(0); }
 char getche(void) {	return getch_(1); }
+
+typedef struct {int wg; char ws[7]; } Game;
