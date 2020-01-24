@@ -15,3 +15,5 @@ void title(void)
       printf("\t*\x1b[40m\x1b[32m  #      #     #   # #   #  ####  ####  ####      # \x1b[0m *\n");
       printf("\t*******************************************************\n\n");
 }
+
+static struct termios stary, nowy;
