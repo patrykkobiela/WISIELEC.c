@@ -27,3 +27,10 @@ void initTermios(int echo) {
 }
 
 void resetTermios(void) { tcsetattr(0, TCSANOW, &stary); }
+
+char getch_(int echo) {
+    initTermios(echo);
+    char ch = getchar();
+    resetTermios();
+    return ch;
+}
