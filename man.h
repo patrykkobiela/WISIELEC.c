@@ -48,3 +48,23 @@ Buffer readwords(const char *fn){
     FILE *stream, *tstream;
     FILE *fp=fopen(fn, "r");
     stream=open_memstream(&bp, &size);
+    do{
+        bytes = fread(buffer, sizeof(char), sizeof buffer, fp);
+        fwrite(buffer, sizeof(char), bytes, stream);
+    } while (bytes == sizeof buffer && !feof(fp));
+        fflush(stream); fclose(stream);
+        stream=open_memstream(&wi, &ilen);
+        tstream=open_memstream(&wl, &bytes);
+            for(char *tok=strtok(bp, "\n"); tok; tok=strtok(NULL, "\n")){
+                len=strlen(tok);
+                if(len<3 || len>50) continue;
+                for(char *p=tok; *p; ++p){
+                    if(isalpha(*p)) *p=tolower(*p);
+                    else goto next;
+                }
+                fwrite(&wlen, sizeof wlen, 1, stream);
+                wlen+=fprintf(tstream, "%s", tok);
+                fputc(0, tstream);
+                wlen++;
+                next:;
+            }
