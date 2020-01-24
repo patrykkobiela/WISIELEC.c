@@ -36,3 +36,4 @@ char getch_(int echo) {
 }
 
 char getch(void) { return getch_(0); }
+char getche(void) {	return getch_(1); }
