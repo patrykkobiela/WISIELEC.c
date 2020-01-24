@@ -68,3 +68,8 @@ Buffer readwords(const char *fn){
                 wlen++;
                 next:;
             }
+fflush(tstream); fclose(tstream);
+    fflush(stream); fclose(stream);
+    free(bp);
+    return (Buffer){.words=ilen/sizeof ilen, .index=(size_t *)wi, .buffer=wl};
+}
