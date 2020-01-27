@@ -49,8 +49,8 @@ int main(void){
     size_t slowo=0;
     char *zagadka=NULL;
     title();
-    menu();
-    getch();
+   // menu();
+    //getch();
     
 //**********************************     MAIN      ******************************************
     do{
